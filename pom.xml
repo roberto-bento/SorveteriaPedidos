@@ -5,7 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
+<<<<<<< HEAD
     <artifactId>SorveteriaPedidos</artifactId>
+=======
+    <artifactId>Sorveteria_pedidos</artifactId>
+>>>>>>> aa4e76b (Parte B do projeto)
     <version>1.0-SNAPSHOT</version>
 
     <properties>
