@@ -1,53 +1,66 @@
 package model;
 
-import observer.PedidoObservable;
-import observer.Observer;
+import observer.ClienteObserver;
 import state.EstadoPedido;
-import state.PedidoRecebido;
-import java.util.ArrayList;
-import java.util.List;
+import state.impl.PedidoRecebido;
+import strategy.DescontoStrategy;
 
 public class Pedido {
-    private Sorvete sorvete;
+    private final Sorvete sorvete;
+    private final DescontoStrategy desconto;
+    private final ClienteObserver cliente;
     private EstadoPedido estado;
-    private PedidoObservable notificacoes;
-    private List<String> historicoEstados = new ArrayList<>();
+    private boolean cancelado = false;
+    private boolean entregue = false;
 
-    public Pedido(Sorvete sorvete) {
+    public Pedido(Sorvete sorvete, DescontoStrategy desconto, ClienteObserver cliente) {
         this.sorvete = sorvete;
+        this.desconto = desconto;
+        this.cliente = cliente;
         this.estado = new PedidoRecebido();
-        this.notificacoes = new PedidoObservable();
-        historicoEstados.add(estado.getEstado());
-        notificacoes.notificar(estado.getEstado());
-    }
-
-    public void setSorvete(Sorvete sorvete) {
-        this.sorvete = sorvete;
     }
 
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
-        historicoEstados.add(estado.getEstado());
-        notificacoes.notificar(estado.getEstado());
     }
 
-    public void proximoEstado() {
-        estado.proximo(this);
+    public EstadoPedido getEstado() {
+        return estado;
     }
 
-    public void adicionarObserver(Observer obs) {
-        notificacoes.adicionarObserver(obs);
+    public void avancarEstado() {
+        if (!cancelado && !entregue) {
+            estado.proximoEstado(this);
+            cliente.atualizar(estado.getStatus());
+            if (estado.getStatus().equals("Entregue")) {
+                entregue = true;
+            }
+        }
     }
 
-    public Sorvete getSorvete() {
-        return sorvete;
+    public void cancelar() {
+        cancelado = true;
     }
 
-    public String getEstadoAtual() {
-        return estado.getEstado();
+    public boolean isCancelado() {
+        return cancelado;
     }
 
-    public List<String> getHistoricoEstados() {
-        return historicoEstados;
+    public boolean isEntregue() {
+        return entregue;
     }
-}
+
+    public String getDescricao() {
+        if (cancelado) {
+            return cliente.getNome() + ": Pedido CANCELADO.";
+        }
+        return cliente.getNome() + ": " + sorvete.getDescricao() + " - Preço: R$" + String.format("%.2f", desconto.aplicarDesconto(sorvete.getPreco()));
+    }
+
+    public String getClienteNome() {
+        return cliente.getNome();
+    }
+
+    public void processar() {
+    }
+} 

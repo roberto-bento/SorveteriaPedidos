@@ -1,12 +1,14 @@
-package state;
+package state.impl;
 
 import model.Pedido;
+import state.EstadoPedido;
 
 public class PedidoEntregue implements EstadoPedido {
-    public void proximo(Pedido pedido) {
+    public void proximoEstado(Pedido pedido) {
         System.out.println("Pedido já foi entregue.");
     }
-    public String getEstado() {
+
+    public String getStatus() {
         return "Entregue";
     }
 }

@@ -1,22 +1,18 @@
-package decorator;
+package decorator.impl;
 
+import decorator.SorveteDecorator;
 import model.Sorvete;
 
 public class Chantilly extends SorveteDecorator {
-    private String sabor;
-
-    public Chantilly(Sorvete sorvete, String sabor) {
+    public Chantilly(Sorvete sorvete) {
         super(sorvete);
-        this.sabor = sabor;
     }
 
-    @Override
-    public String getDescricao() {
-        return sorvete.getDescricao() + " com chantilly sabor " + sabor;
-    }
-
-    @Override
     public double getPreco() {
-        return sorvete.getPreco() + 1.0;
+        return sorvete.getPreco() + 1.5;
+    }
+
+    public String getDescricao() {
+        return sorvete.getDescricao() + " e chantilly";
     }
 }

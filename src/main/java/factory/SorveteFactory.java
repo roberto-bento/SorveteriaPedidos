@@ -1,16 +1,17 @@
 package factory;
 
-import model.sabores;
 import model.Sorvete;
+import model.impl.Massa;
+import model.impl.Milkshake;
+import model.impl.Picole;
 
 public class SorveteFactory {
-
-    public static Sorvete criarSorvete(String tipo, String sabor) {
+    public static Sorvete criarSorvete(String tipo) {
         return switch (tipo.toLowerCase()) {
-            case "massa"     -> new sabores.Massa(sabor);
-            case "milkshake" -> new sabores.Milkshake(sabor);
-            case "picolé"    -> new sabores.Picole(sabor);
-            default          -> throw new IllegalArgumentException("Tipo de sorvete inválido: " + tipo);
+            case "massa" -> new Massa();
+            case "milkshake" -> new Milkshake();
+            case "picole" -> new Picole();
+            default -> throw new IllegalArgumentException("Tipo inválido");
         };
     }
 }

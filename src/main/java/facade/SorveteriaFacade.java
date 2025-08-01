@@ -1,59 +1,25 @@
 package facade;
 
-import command.CancelarPedido;
-import command.FazerPedido;
-import decorator.Calda;
-import decorator.Chantilly;
-import decorator.Cobertura;
-import factory.SorveteFactory;
-import model.Pedido;
-import model.Sorvete;
-import observer.Observer;
-import state.PedidoCancelado;
+import service.GerenciadorPedidos;
+
+import java.util.Scanner;
 
 public class SorveteriaFacade {
+    private final GerenciadorPedidos gerenciadorPedidos = new GerenciadorPedidos();
+    private final Scanner scanner = new Scanner(System.in);
 
-    public Pedido fazerPedido(
-            String tipo,
-            String saborSorvete,
-            boolean cobertura, String saborCobertura,
-            boolean calda, String saborCalda,
-            boolean chantilly, String saborChantilly,
-            Observer cliente
-    ) {
-        Sorvete sorveteBase = SorveteFactory.criarSorvete(tipo, saborSorvete);
-
-        if (cobertura) sorveteBase = new Cobertura(sorveteBase, saborCobertura);
-        if (calda)     sorveteBase = new Calda(sorveteBase, saborCalda);
-        if (chantilly) sorveteBase = new Chantilly(sorveteBase, saborChantilly);
-
-        Pedido pedido = new Pedido(sorveteBase);
-        pedido.adicionarObserver(cliente);
-
-        new FazerPedido(pedido).executar();
-
-        return pedido;
-    }
-
-    public void editarPedido(
-            Pedido pedido,
-            String tipo,
-            String saborSorvete,
-            boolean cobertura, String saborCobertura,
-            boolean calda, String saborCalda,
-            boolean chantilly, String saborChantilly
-    ) {
-        Sorvete novoSorvete = SorveteFactory.criarSorvete(tipo, saborSorvete);
-
-        if (cobertura) novoSorvete = new Cobertura(novoSorvete, saborCobertura);
-        if (calda)     novoSorvete = new Calda(novoSorvete, saborCalda);
-        if (chantilly) novoSorvete = new Chantilly(novoSorvete, saborChantilly);
-
-        pedido.setSorvete(novoSorvete);
-    }
-
-    public void cancelarPedido(Pedido pedido) {
-        new CancelarPedido(pedido).executar();
-        pedido.setEstado(new PedidoCancelado());
+    public void iniciar() {
+        while (true) {
+            System.out.println("1. Novo Pedido\n2. Ver Fila\n3. Processar Fila\n4. Editar Pedido\n5. Sair");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1 -> gerenciadorPedidos.realizarPedido();
+                case 2 -> gerenciadorPedidos.verFila();
+                case 3 -> gerenciadorPedidos.processarFila();
+                case 4 -> gerenciadorPedidos.editarOuCancelarPedido();
+                case 5 -> System.exit(0);
+            }
+        }
     }
 }

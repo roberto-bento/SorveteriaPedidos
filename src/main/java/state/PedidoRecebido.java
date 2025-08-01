@@ -1,12 +1,14 @@
-package state;
+package state.impl;
 
 import model.Pedido;
+import state.EstadoPedido;
 
 public class PedidoRecebido implements EstadoPedido {
-    public void proximo(Pedido pedido) {
+    public void proximoEstado(Pedido pedido) {
         pedido.setEstado(new PedidoPreparando());
     }
-    public String getEstado() {
+
+    public String getStatus() {
         return "Recebido";
     }
 }
