@@ -1,4 +1,4 @@
-package command.impl;
+package command;
 
 import command.PedidoCommand;
 import model.Pedido;

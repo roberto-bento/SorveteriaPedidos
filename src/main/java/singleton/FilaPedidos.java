@@ -1,9 +1,8 @@
 package singleton;
 
 import command.PedidoCommand;
-import command.impl.FazerPedidoCommand;
+import command.FazerPedidoCommand;
 import model.Pedido;
-
 import java.util.LinkedList;
 import java.util.Queue;
 

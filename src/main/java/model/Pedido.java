@@ -2,7 +2,7 @@ package model;
 
 import observer.ClienteObserver;
 import state.EstadoPedido;
-import state.impl.PedidoRecebido;
+import state.PedidoRecebido;
 import strategy.DescontoStrategy;
 
 public class Pedido {

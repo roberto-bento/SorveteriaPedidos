@@ -1,4 +1,4 @@
-package decorator.impl;
+package decorator;
 
 import decorator.SorveteDecorator;
 import model.Sorvete;

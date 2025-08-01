@@ -1,4 +1,4 @@
-package observer.impl;
+package observer;
 
 import observer.ClienteObserver;
 

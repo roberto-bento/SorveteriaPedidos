@@ -1,9 +1,9 @@
 package factory;
 
 import model.Sorvete;
-import model.impl.Massa;
-import model.impl.Milkshake;
-import model.impl.Picole;
+import model.Massa;
+import model.Milkshake;
+import model.Picole;
 
 public class SorveteFactory {
     public static Sorvete criarSorvete(String tipo) {

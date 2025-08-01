@@ -1,18 +1,18 @@
 package service;
 
 import command.PedidoCommand;
-import command.impl.FazerPedidoCommand;
-import decorator.impl.Chantilly;
-import decorator.impl.Cobertura;
+import command.FazerPedidoCommand;
+import decorator.Chantilly;
+import decorator.Cobertura;
 import factory.SorveteFactory;
 import model.Pedido;
 import model.Sorvete;
-import observer.impl.Cliente;
+import observer.Cliente;
 import repository.PedidoRepository;
 import singleton.FilaPedidos;
 import strategy.DescontoStrategy;
-import strategy.impl.DescontoCliente;
-import strategy.impl.DescontoSazonal;
+import strategy.DescontoCliente;
+import strategy.DescontoSazonal;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package state.impl;
+package state;
 
 import model.Pedido;
 import state.EstadoPedido;
